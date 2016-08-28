@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class LD36 extends ApplicationAdapter {
 	SpriteBatch batch;
-	Player player;
+	public static Player player;
 	Sun sun;
 	
 	@Override

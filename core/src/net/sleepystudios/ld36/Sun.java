@@ -25,32 +25,24 @@ public class Sun {
 	public void render(SpriteBatch batch) {
 		angle+=1f;
 		
-		float x = 150;
-		float y = 150;
+		float x = 200;
+		float y = 200;
 		
 		float rad = FW/2;
-		float cx = Gdx.graphics.getWidth()/2-x;
-		float cy = Gdx.graphics.getHeight()/2-y;
+		float cx = Gdx.graphics.getWidth()/2;
+		float cy = Gdx.graphics.getHeight()/2;
 		
-		circle = new Circle(getPosition(new Vector2(cx, cy), rad, angle).x, 
-				getPosition(new Vector2(cx, cy), rad, angle).y, rad);
+		circle = new Circle((float) (cx + x * Math.cos(Math.toRadians(angle))), 
+				(float) (cy + y * Math.sin(Math.toRadians(angle))), rad);
 		
 		batch.end();
 		sr.begin(ShapeType.Line);
 		sr.setColor(Color.RED);
 		sr.circle(circle.x, circle.y, circle.radius);
+		sr.line(new Vector2(circle.x, circle.y), new Vector2(LD36.player.circle.x, LD36.player.circle.y));
 		sr.end();
 		batch.begin();
 		
-		batch.draw(sprite, x, y, cx, cy, FW, FH, 1f, 1f, angle);
-	}
-	
-	public Vector2 getPosition(Vector2 center, float radius, float angle) {
-		angle-=90f;
-		
-		Vector2 p = new Vector2((float) (center.x + radius * Math.cos(Math.toRadians(angle))),
-	    (float) (center.y + radius* Math.sin(Math.toRadians(angle))));
-
-	    return p;
+		batch.draw(sprite, circle.x-FW/2, circle.y-FH/2, FW/2, FH/2, FW, FH, 1f, 1f, angle);
 	}
 }
